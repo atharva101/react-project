@@ -3,21 +3,30 @@ import Multiselect from 'multiselect-react-dropdown';
 import reactDom from "react-dom";
 import { render } from "@testing-library/react";
 import './Dropdown.styles.css'
+import Card from '../machine-card/machine-card.component'
 class DropDown extends React.Component{
     constructor(props){
         super(props);
         
         this.state = {
-            options: [{name: '1️⃣'},{name: '2️⃣'},{name: '3️⃣'},{name: '4'},{name: '3️5'}],
-            selected: []
+            selected: [],
+            options: [
+                {name: '1️⃣',id:'1'},
+                {name: '2️⃣',id:'2'},
+                {name: '3️⃣',id:'3'},
+                {name: '4',id:'4'},
+                {name: '3️5',id:'5'}
+            ]
+           
         }
         this.multiselectRef = React.createRef();
         this.onSelect = this.onSelect.bind(this);
         this.onRemove=this.onRemove.bind(this);
-    
+        
+        
     }
    
-
+    
     resetValues() {
         // By calling the belowe method will reset the selected values programatically
         this.multiselectRef.current.resetSelectedValues();
@@ -31,15 +40,39 @@ class DropDown extends React.Component{
     }*/
 
     onSelect(selectedList,selectedItem) {
-        this.setState({selected:selectedList})
+      //  this.setState({selected:selectedList})
 
-       //this.setState({selected:[...this.state.selected,selectedItem]})
-       //console.log(selectedItem)
+      // this.setState({selected:[...this.state.selected,selectedItem]})
+      // console.log(selectedItem)
+    //  console.log(typeof(selectedItem))
+     // console.log(typeof(selectedList))
+      var a = [];
+      this.state.selected.push(selectedItem)
+      a = this.state.selected
+      console.log(typeof(a)) 
+      console.log(a)
+      this.setState({selected : a })
+      console.log(typeof(this.state.selected))
+      console.log(a)
+      //console.log(this.state.selected)
+     // (this.state.selected.push(selectedItem))
+      
+     // console.log(this.state.selected)
+      //parseInt(selectedItem,10)
+     
+     // this.state.selected.push(selectedItem)
+       //this.setState({selected:b},() => {
+       
     }
 
     onRemove(selectedList,removedItem) {
-        
-        this.setState({selected:selectedList})
+       
+       // console.log(selectedList)
+       var a = []
+        this.state.selected.pop(removedItem)
+        a= this.state.selected
+        this.setState({selected : a })
+        console.log(this.state.selected)
     }
     
     
@@ -49,6 +82,8 @@ class DropDown extends React.Component{
     return(
         
             <span className = 'machine-number'>
+                { console.log(typeof(this.state.options))}
+                { console.log(typeof(this.state.selected))}
               <Multiselect 
                 options={this.state.options}
               //  onChange = {this.handleChange} // Options to display in the dropdown
@@ -67,8 +102,16 @@ class DropDown extends React.Component{
                   },chips: { background: "red" },
                    searchBox: { border: "none", "borderBottom": "1px solid blue", "borderRadius": "0px" } }}
               />
-              {console.log(this.state)}
-            
+              {
+                  this.state.selected.length? this.state.selected.map( e => {
+                      return(
+                          <div key = {e.id}>
+                              {console.log(e)}
+                              <Card variant="outlined"></Card>
+                          </div>
+                      )
+                  }) : console.log('nahi yar')
+              }
             </span>
             
                   
