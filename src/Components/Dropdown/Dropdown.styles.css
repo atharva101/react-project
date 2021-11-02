@@ -3,3 +3,22 @@
     padding: 40PX;
     display: block;
 }
+.grid {
+    display: flex;
+    flex-direction: row;
+    padding-top: 10%;
+    flex-flow: row;
+    border: 10px;
+    background-color: black;
+    justify-content: space-between;
+}
+.gutter-box {
+    padding: 8px 0;
+    background: #00a0e9;
+  }
+
+
+.red{
+    background-color: 'red';
+}
+
